@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    background-color: #33ccff;
+}
+
+.brand-logo {
+    margin-left: 10%;
+}
+
+h1 {
+    text-align: center;
+}
+
+.titledesc {
+    text-align: center;
+}
+
+.article-date {
+    font-size: 0.5em;
+}
+
+
+.footer-button {
+    padding-right: 2%;
+}
+
+.footer-content {
+    display: flex;
+}
+
+.news {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 1%;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pagination {
+    text-align: center;
+}
