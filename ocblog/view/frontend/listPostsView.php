@@ -18,9 +18,9 @@ while ($data = $posts->fetch())
         </h3>
         
         <p>
-            <?= ($data['content']) ?>
+            <?= substr($data['content'], 0, 600) ?>...
             <br />
-            <em><a class="waves-effect waves-light btn-small" href="index.php?action=post&id=<?= $data['id'] ?>">Commentaires</a></em>
+            <em><a class="waves-effect waves-light btn-small" href="index.php?action=post&id=<?= $data['id'] ?>">Lire la suite</a></em>
         </p>
     </div>
     <div class="divider"></div>

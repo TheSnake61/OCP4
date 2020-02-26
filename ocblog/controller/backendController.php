@@ -3,8 +3,7 @@
 // Chargement des classes
 require_once('model/LoginManager.php');
 require_once('model/PostManager.php');
-require_once('model/AdminPostManager.php');
-require_once('model/AdminCommentManager.php');
+require_once('model/CommentManager.php');
 
 function loginCheck($user, $pass)
 {
@@ -43,31 +42,31 @@ function adminListAllPosts()
 
 function adminListAllComments()
 {
-    $adminCommentManager = new AdminCommentManager(); // Création d'un objet
-    $comments = $adminCommentManager->getAllComments(); // Appel d'une fonction de cet objet
+    $CommentManager = new CommentManager(); // Création d'un objet
+    $comments = $CommentManager->getAllComments(); // Appel d'une fonction de cet objet
 
     require('view/backend/backCommentView.php');
 }
 
 function adminListReportedComments()
 {
-    $adminCommentManager = new AdminCommentManager(); // Création d'un objet
-    $comments = $adminCommentManager->getReportedComments(); // Appel d'une fonction de cet objet
+    $CommentManager = new CommentManager(); // Création d'un objet
+    $comments = $CommentManager->getReportedComments(); // Appel d'une fonction de cet objet
 
     require('view/backend/backCommentView.php');
 }
 
 function deleteComment($id)
 {
-    $adminCommentManager = new AdminCommentManager(); // Création d'un objet
-    $comments = $adminCommentManager->deleteComment($_GET['id']); // Appel d'une fonction de cet objet
+    $CommentManager = new CommentManager(); // Création d'un objet
+    $comments = $CommentManager->deleteComment($_GET['id']); // Appel d'une fonction de cet objet
     header ('Location: index.php?action=adminListAllComments');
 }
 
 function unreportComment($id)
 {
-    $adminCommentManager = new AdminCommentManager(); // Création d'un objet
-    $comments = $adminCommentManager->unreportComment($_GET['id']); // Appel d'une fonction de cet objet
+    $CommentManager = new CommentManager(); // Création d'un objet
+    $comments = $CommentManager->unreportComment($_GET['id']); // Appel d'une fonction de cet objet
     header ('Location: index.php?action=adminListAllComments');
 }
 
@@ -80,9 +79,9 @@ function newPost()
 
 function postNewPost($title, $content)
 {
-    $adminPostManager = new AdminPostManager();
+    $PostManager = new PostManager();
 
-    $affectedLines = $adminPostManager->postNewPost($title, $content);
+    $affectedLines = $PostManager->postNewPost($title, $content);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible d\'ajouter l\'article !');
@@ -94,16 +93,16 @@ function postNewPost($title, $content)
 
 function deletePost($id)
 {
-    $adminPostManager = new AdminPostManager(); // Création d'un objet
-    $posts = $adminPostManager->deletePost($_GET['id']); // Appel d'une fonction de cet objet
+    $PostManager = new PostManager(); // Création d'un objet
+    $posts = $PostManager->deletePost($_GET['id']); // Appel d'une fonction de cet objet
     header ('Location: index.php?action=adminListAllPosts&page=1');
 }
 
 function editPost($id)
 {
-    $adminPostManager = new AdminPostManager();
+    $PostManager = new PostManager();
 
-    $post = $adminPostManager->getPost($_GET['id']);
+    $post = $PostManager->getPost($_GET['id']);
 
     require('view/backend/backEditPostView.php');
 
@@ -111,9 +110,9 @@ function editPost($id)
 
 function savePostEdit($id, $title, $content)
 {
-    $adminPostManager = new AdminPostManager();
+    $PostManager = new PostManager();
 
-    $affectedLines = $adminPostManager->savePostEdit($id, $title, $content);
+    $affectedLines = $PostManager->savePostEdit($id, $title, $content);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible de modifier le commentaire !');

@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 <h1>Ajoutez, éditez ou supprimez des billets :<h1>
-<p><em><a class="waves-effect waves-light btn-small" href="index.php?action=newPost">Ecrire un article</a></em></p>
+<a class="waves-effect waves-light btn-small" href="index.php?action=newPost">Ecrire un article</a>
 <div class="divider"></div>
 
 
@@ -13,12 +13,12 @@ while ($post = $posts->fetch())
     <div class="news">
         <h3>
             <?= $post['title'] ?>
-            <em>le <?= $post['creation_date_fr'] ?></em>
+            <em class="article-date">le <?= $post['creation_date_fr'] ?></em>
         </h3>
         
         <p>
-            <?= ($post['content']) ?>
-            <br />
+            <?= substr($post['content'], 0, 600) ?>...
+            <br/>
             <a class="waves-effect waves-light btn-small" href="index.php?action=editPost&amp;id=<?= $post['id'] ?>">Modifier</a>
             <a id="deletepost" class="waves-effect waves-light btn-small" href="index.php?action=deletePost&amp;id=<?= $post['id'] ?>">Supprimer</a>
         </p>

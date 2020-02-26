@@ -48,6 +48,33 @@ class PostManager
         return $post;
     }
 
+    public function deletePost($id)
+    {
+        $db = $this->dbConnect();
+        $posts = $db->prepare('DELETE FROM posts WHERE id = ?');
+        $posts->execute(array($id));
+        $comments = $db->prepare('DELETE FROM comments WHERE post_id = ?');
+        $comments->execute(array($id));
+    }
+
+    public function postNewPost($title, $content)
+    {
+        $db = $this->dbConnect();
+        $posts = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES(?, ?, NOW())');
+        $affectedLines = $posts->execute(array($title, $content));
+
+        return $affectedLines;
+    }
+
+    public function savePostEdit($id, $title, $content)
+    {
+        $db = $this->dbConnect();
+        $posts = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
+        $affectedLines = $posts->execute(array($title, $content, $id));
+
+        return $affectedLines;
+    }
+
 
     private function dbConnect()
     {
