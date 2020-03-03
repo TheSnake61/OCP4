@@ -11,10 +11,10 @@ while ($post = $posts->fetch())
 {
 ?>
     <div class="news">
-        <h3>
+        <h2>
             <?= $post['title'] ?>
             <em class="article-date">le <?= $post['creation_date_fr'] ?></em>
-        </h3>
+        </h2>
         
         <p>
             <?= substr($post['content'], 0, 600) ?>...
